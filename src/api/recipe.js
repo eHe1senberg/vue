@@ -77,3 +77,21 @@ export function pvRecipe(params) {
         params
     })
 }
+
+export function adopt(id) {
+    return axios({
+        method: 'get',
+        url: '/post',
+        data: {
+            recipeId: id
+        }
+
+    })
+}
+
+export function adoptList() {
+    return axios({
+        method: 'get',
+        url: '/adopt/logs'
+    })
+}

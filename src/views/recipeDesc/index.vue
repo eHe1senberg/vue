@@ -2,9 +2,7 @@
   <div>
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/mainNav' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/mainNav/recipe' }"
-        >食谱</el-breadcrumb-item
-      >
+      <el-breadcrumb-item :to="{ path: '/mainNav/recipe' }">食谱</el-breadcrumb-item>
       <el-breadcrumb-item>食谱详情</el-breadcrumb-item>
     </el-breadcrumb>
     <el-row :gutter="20">
@@ -12,14 +10,13 @@
         <div class="content">
           <div :style="{ padding: '26px' }">
             <div class="content_title">{{ recipeDescItem.recipeTitle }}</div>
-            <div
-              :style="{
-                display: 'flex',
-                justifyContent: 'start',
-                alignItems: 'center',
-                marginTop: '5px',
-              }"
-            >
+            <el-button @click="adopt">采纳</el-button>
+            <div :style="{
+              display: 'flex',
+              justifyContent: 'start',
+              alignItems: 'center',
+              marginTop: '5px',
+            }">
               <div>适用年龄：{{ recipeDescItem.isAge }}岁</div>
               <div class="content_time">{{ recipeDescItem.createTime }}</div>
             </div>
@@ -35,11 +32,7 @@
                 {{ recipeDescItem.recipeTitle }}的做法步骤
               </div>
             </div>
-            <div
-              class="step_st"
-              v-for="item in recipeDescItem.children"
-              :key="item.id"
-            >
+            <div class="step_st" v-for="item in recipeDescItem.children" :key="item.id">
               <img :src="`/healthy/uploads/${item.stepImage}`" alt="" />
               <div :style="{ marginLeft: '20px' }">
                 <div class="step_id">{{ item.stepId }}</div>
@@ -49,52 +42,28 @@
           </div>
         </div>
         <div class="common">
-          <comment
-            v-for="item in recipeDescItem.comment"
-            :key="item.id"
-            :data="item"
-            :open="open"
-            :is-vis="true"
-            :like="like"
-          >
+          <comment v-for="item in recipeDescItem.comment" :key="item.id" :data="item" :open="open" :is-vis="true"
+            :like="like">
             <span v-if="item.commentChildren && item.commentChildren.length">
-              <comment
-                v-for="item1 in item.commentChildren"
-                :key="item1.id"
-                :data="item1"
-                :open="open"
-                :isVis="false"
-                :like="like"
-              />
+              <comment v-for="item1 in item.commentChildren" :key="item1.id" :data="item1" :open="open" :isVis="false"
+                :like="like" />
             </span>
           </comment>
         </div>
         <div class="write">
           <div class="write_title">写评论</div>
-          <el-input
-            type="textarea"
-            rows="10"
-            placeholder="你的评论是我最大的动力"
-            v-model="textarea"
-            maxlength="300"
-          >
+          <el-input type="textarea" rows="10" placeholder="你的评论是我最大的动力" v-model="textarea" maxlength="300">
           </el-input>
-          <el-button class="write_bu" @click="addCommentItem('write')"
-            >发表评论</el-button
-          >
+          <el-button class="write_bu" @click="addCommentItem('write')">发表评论</el-button>
         </div>
       </el-col>
       <el-col :span="8">
         <div class="right">
           <div class="right_content">
-            <img
-              :src="
-                recipeDescItem.image
-                  ? `/healthy/uploads/${recipeDescItem.image}`
-                  : require('@/assets/img/avaty.png')
-              "
-              alt=""
-            />
+            <img :src="recipeDescItem.image
+              ? `/healthy/uploads/${recipeDescItem.image}`
+              : require('@/assets/img/avaty.png')
+              " alt="" />
             <span class="right_content_title">{{
               recipeDescItem.username
             }}</span>
@@ -119,40 +88,16 @@
                 <div class="right_content_bottom_wenz">收藏</div>
               </div>
             </div>
-            <el-button
-              v-if="!userCount.isConcern"
-              @click="addUserConcernItem"
-              type="primary"
-              round
-              class="guan_button"
-              >关注</el-button
-            >
-            <el-button
-              v-else
-              @click="addUserConcernItem"
-              round
-              class="guan_button"
-              >取消关注</el-button
-            >
+            <el-button v-if="!userCount.isConcern" @click="addUserConcernItem" type="primary" round
+              class="guan_button">关注</el-button>
+            <el-button v-else @click="addUserConcernItem" round class="guan_button">取消关注</el-button>
           </div>
         </div>
       </el-col>
     </el-row>
 
-    <el-dialog
-      title="回复"
-      :show-close="false"
-      :visible.sync="dialogVisible"
-      width="800"
-      :destroy-on-close="true"
-    >
-      <el-input
-        type="textarea"
-        rows="10"
-        placeholder="你的评论是我最大的动力"
-        v-model="value"
-        maxlength="300"
-      >
+    <el-dialog title="回复" :show-close="false" :visible.sync="dialogVisible" width="800" :destroy-on-close="true">
+      <el-input type="textarea" rows="10" placeholder="你的评论是我最大的动力" v-model="value" maxlength="300">
       </el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -162,31 +107,19 @@
 
     <div class="tool">
       <div class="top">
-        <img
-          @click="addCollectItem"
-          class="img1"
-          :src="
-            count.isCollect
-              ? require('@/assets/img/shoucangxuanzhong.svg')
-              : require('@/assets/img/shoucang.svg')
-          "
-          alt=""
-        />
+        <img @click="addCollectItem" class="img1" :src="count.isCollect
+          ? require('@/assets/img/shoucangxuanzhong.svg')
+          : require('@/assets/img/shoucang.svg')
+          " alt="" />
       </div>
       <div class="bottom">
         <span>{{ count.collectNum }}</span>
       </div>
       <div class="top" :style="{ marginTop: '10px' }">
-        <img
-          @click="addLikeItem"
-          class="img1"
-          :src="
-            count.isLike
-              ? require('@/assets/img/zan.svg')
-              : require('@/assets/img/zanxiao.svg')
-          "
-          alt=""
-        />
+        <img @click="addLikeItem" class="img1" :src="count.isLike
+          ? require('@/assets/img/zan.svg')
+          : require('@/assets/img/zanxiao.svg')
+          " alt="" />
       </div>
       <div class="bottom">
         <span>{{ count.likeNum }}</span>
@@ -204,6 +137,7 @@ import {
   addLike,
   addCollect,
   getUserInfo,
+  adopt
 } from "../../api/recipe";
 import { addUserConcern } from "../../api/personCenter";
 import Comment from "./components/common.vue";
@@ -376,7 +310,12 @@ export default {
           this.$message.error(res.message);
         }
         this.getUserInfoItem(this.recipeDescItem.authorId);
-      } catch (e) {}
+      } catch (e) { }
+    },
+    async adopt() {
+      let { id } = this.$route.query;
+      await adopt(id)
+      this.$message.success("采纳成功");
     },
   },
   mounted() {
@@ -396,10 +335,12 @@ export default {
   box-shadow: 0px 1px 4px 0px rgb(0 0 0 / 15%);
   font-family: Roboto;
 }
+
 .content {
   margin-top: 30px;
   // width: 1200px;
   .cla;
+
   .content_title {
     // width: 1148px;
     color: #101010;
@@ -408,6 +349,7 @@ export default {
     text-align: left;
     font-family: SourceHanSansSC-medium;
   }
+
   .content_time {
     color: #999;
     font-size: 14px;
@@ -415,6 +357,7 @@ export default {
     font-family: SourceHanSansSC-regular;
     margin-left: 10px;
   }
+
   .content_desc {
     // width: 1157px;
     color: #626262;
@@ -423,22 +366,27 @@ export default {
     font-family: SourceHanSansSC-medium;
   }
 }
+
 .step {
   .cla;
   padding: 30px;
   margin-top: 30px;
+
   .step_title {
     color: #ff6767;
     font-size: 25px;
     margin-left: 10px;
   }
+
   .step_st {
     display: flex;
     margin-top: 30px;
+
     img {
       width: 200px;
       height: 150px;
     }
+
     .step_id {
       border: 1px solid #ddd;
       color: #999;
@@ -449,6 +397,7 @@ export default {
       text-align: center;
       width: 28px;
     }
+
     .step_desc {
       margin-top: 15px;
       font-size: 17px;
@@ -457,22 +406,26 @@ export default {
     }
   }
 }
+
 .common {
   .cla;
   padding: 30px;
   margin-top: 30px;
 }
+
 .write {
   .cla;
   padding: 30px;
   margin-top: 30px;
   overflow: hidden;
+
   .write_title {
     color: #101010;
     font-size: 16px;
     font-family: SourceHanSansSC-regular;
     margin-bottom: 10px;
   }
+
   /deep/.el-textarea__inner {
     line-height: 20px;
     border-radius: 4px;
@@ -483,6 +436,7 @@ export default {
     font-family: Microsoft Yahei;
     resize: none;
   }
+
   .write_bu {
     margin: 20px 0;
     float: right;
@@ -494,10 +448,12 @@ export default {
     box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
   }
 }
+
 .tool {
   position: fixed;
   left: calc((100vw - 1200px) / 4);
   top: 200px;
+
   .top {
     width: 48px;
     height: 48px;
@@ -507,11 +463,13 @@ export default {
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     cursor: pointer;
+
     .img1 {
       width: 22px;
       height: 22px;
     }
   }
+
   .bottom {
     width: 48px;
     height: 22px;
@@ -526,6 +484,7 @@ export default {
     top: -10px;
   }
 }
+
 .right {
   margin-top: 30px;
   min-height: 247px;
@@ -533,13 +492,16 @@ export default {
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+
   .right_content {
     padding: 20px 30px;
+
     img {
       width: 48px;
       height: 48px;
       border-radius: 50%;
     }
+
     .right_content_title {
       color: rgba(85, 86, 102, 1);
       font-size: 16px;
@@ -549,16 +511,19 @@ export default {
       position: relative;
       top: -30px;
     }
+
     .right_content_bottom {
       display: flex;
       justify-content: space-around;
       align-items: center;
+
       .right_content_bottom_number {
         color: rgba(85, 86, 102, 1);
         font-size: 18px;
         text-align: center;
         font-family: SourceHanSansSC-regular;
       }
+
       .right_content_bottom_wenz {
         color: rgba(128, 128, 128, 1);
         font-size: 16px;
@@ -567,6 +532,7 @@ export default {
         margin-top: 5px;
       }
     }
+
     .guan_button {
       width: 100%;
       margin-top: 20px;

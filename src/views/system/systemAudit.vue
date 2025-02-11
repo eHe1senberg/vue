@@ -68,9 +68,6 @@
             size="small"
             >查看</el-button
           >
-          <el-button v-if="scope.row.isAuditState == 2" type="text" size="small"
-            >审核回退</el-button
-          >
         </template>
       </el-table-column>
     </tableMy>

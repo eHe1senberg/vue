@@ -12,7 +12,7 @@
         <div class="content_title">
           {{ foodMaterialDescItem.foodMaterialTitle }}
         </div>
-        <div class="content_time">2023-02-02 16:58:27</div>
+        <div class="content_time">{{ foodMaterialDescItem.createTime }}</div>
         <el-divider></el-divider>
         <div
           class="content_desc"

@@ -179,8 +179,8 @@ export default {
                 input.type = "file";
                 input.addEventListener("change", async (e) => {
                   let file = input.files[0];
-                  if (file.type !== "image/jpeg") {
-                    return self.$message.error("请上传图片");
+                  if (file.type.startsWith("image/")) {
+                    return
                   }
                   try {
                     let formData = new FormData();

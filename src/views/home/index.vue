@@ -262,6 +262,7 @@ import {
   getRecommendedIngredients,
   getRecommendedRecipe,
 } from "../../api/home";
+import { getContent } from "../../utils/gitlab";
 export default {
   data() {
     
@@ -284,8 +285,8 @@ export default {
     async getRecommendedIngredientsItem() {
       try {
         let res = await getRecommendedIngredients();
-        this.recommendedIngredients = res.data;
-        console.log(res.data);
+        const data=res.data?.map(t=>({...t,foodMaterialDesc:getContent(t.foodMaterialDesc)}))
+        this.recommendedIngredients = data
       } catch (err) {
         console.log(err);
       }
@@ -293,7 +294,8 @@ export default {
     async getRecommendedRecipeItem() {
       try {
         let res = await getRecommendedRecipe();
-        this.recommendedRecipe = res.data;
+        const data=res.data?.map(t=>({...t,recipeDesc:getContent(t.recipeDesc)}))
+        this.recommendedRecipe = data
       } catch (err) {
         console.log(err);
       }
