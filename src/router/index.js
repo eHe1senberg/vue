@@ -155,6 +155,11 @@ const routes = [
             path: "/mainNav/peopleCenter/editMyInfo",
             component: () => import("@/views/peopleCenter/component/editMyInfo"),
           },
+          {
+            name: "myAbot ",
+            path: "/mainNav/peopleCenter/myAbot",
+            component: () => import("@/views/peopleCenter/component/myAbot"),
+          },
         ]
       },
     ],
