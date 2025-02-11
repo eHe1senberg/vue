@@ -157,8 +157,8 @@ const routes = [
           },
           {
             name: "myAbot ",
-            path: "/mainNav/peopleCenter/myAbot",
-            component: () => import("@/views/peopleCenter/component/myAbot"),
+            path: "/mainNav/peopleCenter/myAdopt",
+            component: () => import("@/views/peopleCenter/component/myAdopt"),
           },
         ]
       },
