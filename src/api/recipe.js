@@ -80,8 +80,8 @@ export function pvRecipe(params) {
 
 export function adopt(id) {
     return axios({
-        method: 'get',
-        url: '/post',
+        method: 'post',
+        url: '/adopt/addAdopt',
         data: {
             recipeId: id
         }

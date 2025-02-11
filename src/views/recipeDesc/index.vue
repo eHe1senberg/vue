@@ -314,6 +314,7 @@ export default {
     },
     async adopt() {
       let { id } = this.$route.query;
+      console.log(id);
       await adopt(id)
       this.$message.success("采纳成功");
     },

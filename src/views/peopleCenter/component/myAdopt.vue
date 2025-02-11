@@ -48,7 +48,7 @@ export default {
     methods: {
         async getMyAdoptItem() {
             try {
-                let res = await adoptList(params);
+                let res = await adoptList();
                 if (res.code == 200) {
                     this.data = res.data.list || [];
                     this.advice = res.data.advice || '';
